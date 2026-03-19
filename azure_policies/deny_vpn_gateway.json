@@ -1,0 +1,27 @@
+
+{
+  "properties": {
+    "displayName": "Deny VPN Gateway",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Blocks creation of VPN gateways for VNets",
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Network/virtualNetworkGateways"
+          },
+          {
+            "field": "Microsoft.Network/virtualNetworkGateways/gatewayType",
+            "equals": "Vpn"
+          }
+        ]
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  }
+}
+

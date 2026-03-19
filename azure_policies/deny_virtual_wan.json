@@ -1,0 +1,17 @@
+{
+  "properties": {
+    "displayName": "Deny Virtual WAN",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Blocks creation of Virtual WAN",
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Network/virtualWans"
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  }
+}

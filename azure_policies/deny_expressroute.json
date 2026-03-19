@@ -1,0 +1,33 @@
+{
+  "properties": {
+    "displayName": "Deny ExpressRoute",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Blocks creation of ExpressRoute circuits and ExpressRoute gateways",
+    "policyRule": {
+      "if": {
+        "anyOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Network/expressRouteCircuits"
+          },
+          {
+            "allOf": [
+              {
+                "field": "type",
+                "equals": "Microsoft.Network/virtualNetworkGateways"
+              },
+              {
+                "field": "Microsoft.Network/virtualNetworkGateways/gatewayType",
+                "equals": "ExpressRoute"
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "properties": {
+    "displayName": "Deny Virtual Hub",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Blocks creation of Virtual Hub resources",
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Network/virtualHubs"
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  }
+}

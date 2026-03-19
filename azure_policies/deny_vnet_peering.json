@@ -1,0 +1,17 @@
+{
+  "properties": {
+    "displayName": "Deny VNet Peering",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Blocks creation of virtual network peering",
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings"
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  }
+}
