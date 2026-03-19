@@ -1,4 +1,3 @@
-
 {
   "properties": {
     "displayName": "Allow Private Endpoints only for Storage, Key Vault, and Cosmos DB",
@@ -18,10 +17,6 @@
                 {
                   "allOf": [
                     {
-                      "field": "Microsoft.Network/privateEndpoints/privateLinkServiceConnections[*].privateLinkServiceId",
-                      "contains": "Microsoft.Storage/storageAccounts"
-                    },
-                    {
                       "field": "Microsoft.Network/privateEndpoints/privateLinkServiceConnections[*].groupIds[*]",
                       "in": [ "blob", "file", "queue", "table" ]
                     }
@@ -30,21 +25,13 @@
                 {
                   "allOf": [
                     {
-                      "field": "Microsoft.Network/privateEndpoints/privateLinkServiceConnections[*].privateLinkServiceId",
-                      "contains": "Microsoft.KeyVault/vaults"
-                    },
-                    {
                       "field": "Microsoft.Network/privateEndpoints/privateLinkServiceConnections[*].groupIds[*]",
-                      "equals": "vault"
+                      "in": [ "vault" ]
                     }
                   ]
                 },
                 {
                   "allOf": [
-                    {
-                      "field": "Microsoft.Network/privateEndpoints/privateLinkServiceConnections[*].privateLinkServiceId",
-                      "contains": "Microsoft.DocumentDB/databaseAccounts"
-                    },
                     {
                       "field": "Microsoft.Network/privateEndpoints/privateLinkServiceConnections[*].groupIds[*]",
                       "in": [ "Sql", "MongoDB", "Cassandra", "Table", "Gremlin" ]
