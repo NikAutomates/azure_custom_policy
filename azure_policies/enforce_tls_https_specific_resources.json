@@ -1,0 +1,43 @@
+{
+  "properties": {
+    "displayName": "Enforce TLS 1.2+ and HTTPS - SB22 Environment",
+    "policyType": "Custom",
+    "mode": "Indexed",
+    "description": "Ensures TLS 1.2+ or HTTPS is enforced on supported Azure resources only.",
+    "policyRule": {
+      "if": {
+        "anyOf": [
+          {
+            "allOf": [
+              { "field": "type", "equals": "Microsoft.Storage/storageAccounts" },
+              {
+                "anyOf": [
+                  {
+                    "field": "Microsoft.Storage/storageAccounts/supportsHttpsTrafficOnly",
+                    "notEquals": true
+                  },
+                  {
+                    "field": "Microsoft.Storage/storageAccounts/minimumTlsVersion",
+                    "notEquals": "TLS1_2"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "allOf": [
+              { "field": "type", "equals": "Microsoft.DocumentDB/databaseAccounts" },
+              {
+                "field": "Microsoft.DocumentDB/databaseAccounts/minimalTlsVersion",
+                "notEquals": "Tls12"
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  }
+}
